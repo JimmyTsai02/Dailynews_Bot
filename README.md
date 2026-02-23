@@ -49,5 +49,4 @@
 4. 進入 **Actions** 頁籤，點擊 `workflow_dispatch` 手動觸發第一次執行。
 5. 完成！預設排程為每天台灣時間早上 09:00 (UTC 01:00)，你也可以在 `.github/workflows/schedule.yml` 中自由修改 Cron 時間。
 
----
-*Built by [你的 GitHub 帳號名稱] | 專注於將數據轉化為決策價值。*
+
