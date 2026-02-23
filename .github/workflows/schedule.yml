@@ -1,0 +1,33 @@
+name: 每日新聞晨報推播 (Daily News Bot)
+
+on:
+  schedule:
+    # 這裡使用的是 UTC 時間！台灣時間 (UTC+8) 的早上 09:00，等於 UTC 的 01:00
+    - cron: '0 1 * * *'
+  workflow_dispatch: # 加上這個神奇按鈕，讓你可以隨時手動點擊測試
+
+jobs:
+  run-news-bot:
+    runs-on: ubuntu-latest # 使用最新的 Linux 雲端虛擬機
+
+    steps:
+      - name: 📥 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 🐍 設定 Python 環境
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12.3' # 設定 Python 版本
+
+      - name: 📦 安裝必備套件
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 🚀 執行新聞爬蟲與推播腳本
+        env:
+          # 將剛剛設定的 Secrets 提取出來當作環境變數
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        # 記得確認這裡的檔名跟你的 Python 檔名完全一致 (這裡假設是 dailynews.py)
+        run: python dailynews.py
