@@ -4,7 +4,7 @@ on:
   schedule:
     # 這裡使用的是 UTC 時間！台灣時間 (UTC+8) 的早上 09:00，等於 UTC 的 01:00
     - cron: '15 2 * * *'
-  workflow_dispatch: # 加上這個神奇按鈕，讓你可以隨時手動點擊測試
+  workflow_dispatch: 
 
 jobs:
   run-news-bot:
